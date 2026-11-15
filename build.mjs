@@ -1,4 +1,5 @@
 
+import { originalArtwork } from './original.mjs'
 import { restore, galleryFooter } from './restore.mjs'
 import { mkdir, writeFile, cp, access } from 'node:fs/promises'
 import { contact as c, media, steps, documents, faq, balanceFiles } from './content.mjs'
@@ -66,7 +67,13 @@ const pages = {
 restore(pages,{c,media,title,btn,chip,a,chatBtn,icon,grid,stepCards,questionList,faq})
 pages['/buscar'] = ['Buscar','Busque no site da Casa dos Autistas.',title('CASA DOS AUTISTAS','Buscar no site','Encontre páginas, profissionais e e-books.')+'<section class="section wrap narrow"><form id="search-form" class="search-form" role="search"><label class="visually-hidden" for="search-term">O que você procura?</label><input id="search-term" name="q" placeholder="Ex.: currículo, autismo, oficinas" required><button type="submit" class="button primary">Buscar</button></form><p id="search-status" role="status"></p><ul id="search-results" class="search-results"></ul></section>']
 function layout(path,[name,description,body]) {
-  return '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="'+description+'"><meta name="robots" content="noindex"><meta name="theme-color" content="#fcf9f2"><title>'+name+' | Casa dos Autistas de Betim</title><link rel="icon" href="'+media.logo+'"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="/site.css"><script type="module" src="/site.js"></script><script type="module" src="/family-chat.js"></script></head><body><a href="#main" class="skip">Pular para o conteúdo</a><div class="preview-note">Modelo de demonstração <a href="'+c.official+'">Ver o site atual</a></div>'+links(path)+'<main id="main">'+body+'</main>'+footer(path)+dialog+'</body></html>'
+  const parent = path.startsWith('/teacher/')?['/profissionais','Profissionais']:path.startsWith('/classes/')?['/ebooks','E-books']:null
+  if (path!=='/') {
+    const picture = ['/quem-somos','/autismo'].includes(path)?originalArtwork.themeBanner:originalArtwork.innerBanner
+    const breadcrumb = '<nav class="breadcrumbs" aria-label="Você está aqui">'+a('/','Início')+(parent?' <span aria-hidden="true">›</span> '+a(...parent):'')+' <span aria-hidden="true">›</span> <span aria-current="page">'+name+'</span></nav>'
+    body = body.replace('<section class="inner-hero"><div class="wrap">','<section class="inner-hero" style="--inner-banner:url(&quot;'+picture+'&quot;)"><div class="wrap">'+breadcrumb)
+  }
+  return '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="'+description+'"><meta name="robots" content="noindex"><meta name="theme-color" content="#fcf9f2"><title>'+name+' | Casa dos Autistas de Betim</title><link rel="icon" href="'+media.logo+'"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="/site.css"><script type="module" src="/site.js"></script><script type="module" src="/family-chat.js"></script><script type="module" src="/original-interactions.js"></script></head><body><a href="#main" class="skip">Pular para o conteúdo</a><div class="preview-note">Modelo de demonstração <a href="'+c.official+'">Ver o site atual</a></div>'+links(path)+'<main id="main">'+body+'</main>'+footer(path)+dialog+'<button type="button" class="back-top" aria-label="Voltar ao topo" hidden>↑</button></body></html>'
 }
 await mkdir('dist',{recursive:true})
 await cp('public','dist',{recursive:true})

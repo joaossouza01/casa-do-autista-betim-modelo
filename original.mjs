@@ -79,3 +79,63 @@ export const books = [
  ['seja-um-especialista-como-escrever-e-aprovar-projetos-culturais-em-leis-de-incentivo','Seja um Especialista: Como Escrever e Aprovar Projetos Culturais em Leis de Incentivo','39,00','32','01/06/2025','14 a 18','2025/08/imagem-do-whatsapp-de-2025-05-29-s-18-57-37_85037942-lg5xr856bd.webp','B0FBN5PD4P',
   'Um guia para artistas, produtores, gestores e empreendedores culturais. Traz exemplos de como estruturar propostas, montar orçamentos, captar recursos, buscar patrocinadores e prestar contas em projetos culturais.',defaultAuthor+' e Sérgio Siebler'],
 ].map(([slug,title,price,pages,date,ages,image,asin,summary,author=defaultAuthor])=>({slug,title,price,pages,date,ages,image:uploads+image,buy:'https://www.amazon.com.br/dp/'+asin,summary,author}))
+
+
+export const originalArtwork = {
+  themeBanner:'https://wordpress.vecurosoft.com/toddly/wp-content/uploads/2025/08/breadcrumb-bg-3.jpg',
+  innerBanner:uploads+'2025/07/breadcrumb-bg-1.jpg',
+  secondAbout:uploads+'2025/07/5084BA6F-8B63-412C-B7D7-5A6E398B16C4_1_105_c.jpeg',
+  aboutAccent:uploads+'2025/10/as.png',
+  author:uploads+'2025/08/Imagem-do-WhatsApp-de-2025-10-29-as-14.58.12_cf5ce720-236x300.jpg',
+  contactIcon:'https://wordpress.vecurosoft.com/toddly/wp-content/uploads/2025/08/service-icon-contact.png',
+  contactDivider:'https://wordpress.vecurosoft.com/toddly/wp-content/uploads/2025/08/divider-contact.svg',
+  careerDecorations:[uploads+'2025/08/events-page-ele1.png',uploads+'2025/08/events-page-ele2.png'],
+}
+export const careHighlights = [
+  ['Atendimento Terapêutico Infantil','Acompanhamento com profissionais especializados em desenvolvimento.',support[0][3]],
+  ['Ambiente Seguro e Inclusivo','Cuidamos para garantir conforto, acolhimento e bem-estar.',uploads+'2025/08/why-choose-us-icon-1-3.png'],
+  ['Aprendizagem com Afeto','Estímulos criativos e atividades que respeitam o ritmo de cada criança.',support[1][3]],
+  ['Equipe Multidisciplinar','Profissionais capacitados em TEA e desenvolvimento infantil.',support[2][3]],
+]
+export const supportExamples = [
+  ['Pode realizar atividades com certa independência.','Pode encontrar dificuldades em interações sociais e em lidar com mudanças.','As necessidades de apoio podem nem sempre ser aparentes.'],
+  ['Pode precisar de apoio mais frequente para se comunicar e interagir.','Comportamentos repetitivos e dificuldade com mudanças podem fazer parte da rotina.','Pode precisar de apoio regular nas atividades diárias.'],
+  ['Pode usar formas alternativas de comunicação.','Mudanças na rotina podem exigir mais apoio.','Pode precisar de apoio frequente em tarefas do dia a dia, no bem-estar e na segurança.'],
+]
+export const articleCopy = [
+  'O Transtorno do Espectro Autista (TEA) é uma condição do neurodesenvolvimento que pode influenciar como a pessoa se comunica, interage e percebe o mundo. O termo “espectro” descreve como o autismo se manifesta de formas diferentes em cada pessoa, com diferentes necessidades de apoio no dia a dia.',
+  'O autismo faz parte da neurodiversidade. Com apoio adequado, respeito e inclusão, pessoas autistas podem aprender, trabalhar, construir relações e participar da vida em comunidade.',
+  'Cada pessoa no espectro é única. Valorizar habilidades, respeitar formas de comunicação e oferecer o suporte adequado ajuda a construir uma sociedade mais justa e inclusiva.',
+]
+export const bookDetailCopy = [
+  [
+    'Maria Clara conheceu Augusto quando estava no colégio, onde ele era seu professor. O relacionamento começou um tempo depois e culminou em casamento. O que parecia um conto de fadas foi desmoronando à medida que ela conhecia uma face assustadora do marido.',
+    'Anos mais tarde, ao encontrar seus diários, Maria Clara relembra os altos e baixos da sua vida, as dificuldades que enfrentou e o pretendente improvável que encontrou no caminho.',
+    'O romance aborda um transtorno mental e explora como as relações mudam quando a pessoa recebe cuidado adequado, expondo a complexidade dos vínculos humanos.',
+  ],
+  [
+    'Agueiro é o refluxo da água que retorna da costa para o mar. A imagem das marés, que revolvem o fundo e trazem à tona o que estava submerso, serve de ponto de partida para esta coletânea.',
+    'O autor reúne poemas de diferentes momentos da própria vida para revelar sentimentos e intimidades.',
+  ],
+  [
+    'A diversidade geográfica e cultural do Brasil inspira a coletânea. O autor faz dessa variedade um ponto de partida para criar personagens marcados pela brasilidade e apresentar diferenças regionais sem recorrer a caricaturas.',
+    'A obra foi publicada após O Conto da Libélula, primeiro romance do autor. Os contos dão voz a personagens fictícios com dores, desejos, erros e sentimentos, e mostram fraquezas e virtudes reconhecíveis em qualquer época.',
+  ],
+  [
+    'Um guia prático para artistas, produtores, gestores e empreendedores culturais que querem transformar boas ideias em propostas. Apresenta exemplos de como elaborar projetos, captar recursos e prestar contas.',
+    'O livro aborda a Lei Rouanet e leis estaduais de incentivo, com orientação para estruturar uma proposta, montar um orçamento e buscar patrocinadores.',
+  ],
+]
+export const bookTakeaways = ['Aprovar projetos culturais nas principais leis de incentivo','Captar recursos públicos e privados','Evitar erros comuns na elaboração e submissão','Profissionalizar a atuação no setor cultural']
+export const bibliographyNotes = [
+  'Primeiro livro do autor, com poemas escritos desde a juventude.',
+  'Coletânea de contos inspirados em viagens por dezessete estados brasileiros.',
+  'Romance sobre autodescoberta e erotismo.',
+  'Romance com reflexões sobre a natureza humana.',
+  'Coleção infantil de seis livros com temas educativos e inclusivos.',
+  'Narrativa sobre o universo autista reconhecida internacionalmente.',
+  'Romance de época ambientado na Romênia durante a ditadura comunista.',
+  'Suspense psicológico ambientado no Teatro Amazonas, em Manaus.',
+  'Obra reflexiva sobre experiências pessoais e decisões da vida.',
+  'Livro infantil interativo voltado à alfabetização.',
+]

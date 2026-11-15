@@ -22,12 +22,13 @@ for (const file of pages) {
   }
 }
 for (const [file,expected] of [
- ['index.html', ['Dryca Moreira','Ambiente seguro e afetuoso','Espaço de aprendizagem e inclusão','Níveis de suporte']],
+ ['index.html', ['Dryca Moreira','Ambiente seguro e afetuoso','Espaço de aprendizagem e inclusão','Níveis de suporte','role="tablist"','Saiba mais sobre quem somos','Pausar banners','data-gallery-image']],
  ['quem-somos.html', ['Missão','Visão','Nossos valores','Análise do Comportamento Aplicada']],
- ['autismo.html',['Características que podem aparecer','Inclusão e respeito','Nível 3']],
+ ['autismo.html',['Características que podem aparecer','Inclusão e respeito','Nível 3','Atendimento Terapêutico Infantil','Ambiente Seguro e Inclusivo','Aprendizagem com Afeto','Equipe Multidisciplinar']],
  ['profissionais.html',professionals.map(item=>item.name)],
- ['ebooks.html',books.map(item=>item.title)],
+ ['ebooks.html',[...books.map(item=>item.title),'Próximos e-books']],
  ['trabalhe-conosco.html',['Data de nascimento','Redes sociais','id="cv"']],
+ ['transparencia.html',['Declaração de ausência de faturamento','Consultar declaração no site oficial']],
  ['contato.html',['id="contact-form"','id="contact-subject"']],
  ['como-ser-atendido.html',['Ainda tenho dúvida','O que levar à UBS']],
 ]) {

@@ -109,16 +109,6 @@ if (resume) {
 }
 
 
-/* Keep the original two home highlights available without auto-rotation. */
-const slideButtons = [...document.querySelectorAll('[data-show-slide]')]
-const slides = [...document.querySelectorAll('[data-slide]')]
-slideButtons.forEach((button,index)=>{
-  button.addEventListener('click',()=>{
-    slides.forEach((slide,position)=>{slide.hidden=position!==index})
-    slideButtons.forEach((item,position)=>item.setAttribute('aria-pressed',String(position===index)))
-  })
-})
-
 const contactForm = document.querySelector('#contact-form')
 if (contactForm) {
   const link=document.querySelector('#contact-mail')
