@@ -5,6 +5,7 @@ if (hero) {
   const slides = [...hero.querySelectorAll('[data-slide]')]
   const control = hero.querySelector('[data-carousel-toggle]')
   const count = hero.querySelector('#banner-count')
+  const track = hero.querySelector('.hero-track')
   let index = 0
   let paused = reducedMotion.matches
   let pointerInside = false
@@ -12,6 +13,7 @@ if (hero) {
 
   function showSlide(next) {
     index = (next+slides.length)%slides.length
+    track.style.transform = `translateX(-${index*100}%)`
     slides.forEach((slide,i)=>{
       const active = i===index
       slide.classList.toggle('is-active',active)
@@ -29,7 +31,7 @@ if (hero) {
     },5500)
   }
   function updateControl() {
-    control.textContent = paused?'▶':'Ⅱ'
+    control.innerHTML = paused ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 10 7-10 7Z" fill="currentColor"/></svg>' : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14" fill="none" stroke="currentColor" stroke-width="3"/></svg>'
     control.setAttribute('aria-label',paused?'Reproduzir banners':'Pausar banners')
     schedule()
   }
