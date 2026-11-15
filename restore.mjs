@@ -1,0 +1,51 @@
+
+import { heroSlides, coordinator, gallery, story, mission, vision, values, practice, traits, support, autismArt, professionals, books, authorBio, bibliography } from './original.mjs'
+
+export const galleryFooter = (instagram) => '<div class="wrap gallery-footer"><div><h2>Instagram</h2><p>A verdadeira inclusão começa com a empatia.</p></div><div class="mini-gallery">' + gallery.map((image,i)=>'<a href="'+instagram+'" aria-label="Acompanhar a Casa no Instagram, foto '+(i+1)+'"><img src="'+image+'" alt="" loading="lazy"></a>').join('') + '</div></div>'
+export function restore(pages,{c,media,title,btn,chip,a,chatBtn,icon,grid,stepCards,questionList,faq}) {
+  const inset = body=>'<section class="section wrap">'+body+'</section>'
+  const prose = items=>items.map(item=>'<p>'+item+'</p>').join('')
+  const list = items=>'<ul>'+items.map(item=>'<li>'+item+'</li>').join('')+'</ul>'
+  const photo = (src,alt)=>'<img src="'+src+'" alt="'+alt+'" loading="lazy">'
+  const supportCards = '<div class="cards">'+support.map(([level,label,body,img],index)=>'<article class="card support-card '+['support-yellow','support-purple','support-green'][index]+'">'+photo(img,'')+'<h3>'+level+' · '+label+'</h3><p>'+body+'</p></article>').join('')+'</div>'
+  const portraits = '<div class="portrait-grid">'+professionals.map(p=>'<article class="portrait"><a href="/teacher/'+p.slug+'">'+photo(p.image,p.name)+'<div><h3>'+p.name+'</h3><p>'+p.role+'</p><span>Ver perfil '+icon('arrow')+'</span></div></a></article>').join('')+'</div>'
+  const library = '<div class="book-grid">'+books.map(book=>'<article class="book"><a class="book-cover" href="/classes/'+book.slug+'">'+photo(book.image,'Capa de '+book.title)+'</a><div><p class="book-meta">'+book.pages+' páginas · '+book.date+' · '+book.ages+' anos</p><h3><a href="/classes/'+book.slug+'">'+book.title+'</a></h3><p>'+book.author+'</p><p class="book-excerpt">'+book.summary+'</p><div class="book-end"><strong>R$ '+book.price+'</strong>'+a('/classes/'+book.slug,'Detalhes '+icon('arrow'),'text-link')+'</div></div></article>').join('')+'</div>'
+  const homeHero = '<section class="classic-hero" aria-label="Destaques da Casa">'+heroSlides.map(([label,heading,desc,cta,bg,art],index)=>'<div class="classic-slide" data-slide'+(index?' hidden':'')+' style="--banner:url(&quot;'+bg+'&quot;)"><div class="wrap classic-composition"><div class="classic-copy">'+chip(label)+'<'+(index?'h2':'h1')+'>'+heading+'</'+(index?'h2':'h1')+'><p>'+desc+'</p><div class="actions">'+btn('/quem-somos',cta)+btn('/como-ser-atendido','Como ser atendido','secondary')+'</div></div><div class="classic-art">'+photo(art,'')+'</div></div></div>').join('')+
+    '<div class="wrap slide-controls" aria-label="Escolher destaque"><button type="button" data-show-slide="0" aria-label="Ambiente seguro e afetuoso" aria-pressed="true"><span aria-hidden="true"></span></button><button type="button" data-show-slide="1" aria-label="Espaço de aprendizagem e inclusão" aria-pressed="false"><span aria-hidden="true"></span></button></div></section>'
+  pages['/'][2] = homeHero+
+    inset('<div class="section-title"><div>'+chip('ENTENDA O AUTISMO')+'<h2>Níveis de suporte</h2></div>'+a('/autismo','Conheça o espectro '+icon('arrow'),'text-link')+'</div>'+supportCards+'<div class="actions">'+btn('/contato','Fale com a gente','secondary')+'</div>')+
+    '<section class="section tinted"><div class="wrap split founder">'+photo(coordinator.photo,coordinator.name)+'<div>'+chip('A CASA DOS AUTISTAS')+'<h2>Com a palavra, a coordenadora e idealizadora do projeto</h2><blockquote>“'+coordinator.quote+'”</blockquote><p><strong>'+coordinator.name+'</strong></p></div></div></section>'+
+    inset('<div class="section-title"><div>'+chip('PARA FAMÍLIAS')+'<h2>Por onde começar</h2></div>'+a('/como-ser-atendido','Ver passo a passo '+icon('arrow'),'text-link')+'</div>'+stepCards()+'<div class="actions">'+chatBtn('Ainda tenho dúvida')+'</div>')+
+    '<section class="section tinted"><div class="wrap split"><div class="feature-image">'+photo(media.activity,'Registro de atividade na Casa')+'</div><div>'+chip('A CASA NO DIA A DIA')+'<h2>Aprender, brincar e conviver</h2><p>Conheça as oficinas e atividades da Casa dos Autistas.</p>'+btn('/oficinas','Conheça as oficinas')+'</div></div></section>'
+  pages['/quem-somos'][2] = title('CASA DOS AUTISTAS','Quem Somos','Conheça a história, os valores e o trabalho da Casa dos Autistas de Betim.')+
+    inset('<div class="split"><div class="editorial"><h2>Nossa história</h2>'+prose(story)+'</div><div class="feature-image">'+photo(media.activity,'Atividade na Casa dos Autistas')+'</div></div>')+
+    '<section class="section tinted"><div class="wrap"><div class="mission-grid"><article><h2>Missão</h2><p>'+mission+'</p></article><article><h2>Visão</h2><p>'+vision+'</p></article></div><h2>Nossos valores</h2>'+grid(values.map(([label,desc],i)=>[label,desc,['heart','people','check'][i%3],['lilac','sun','mint'][i%3]]))+'</div></section>'+
+    inset('<div class="editorial narrow"><h2>Profissionais</h2>'+prose(practice)+'<div class="actions">'+btn('/profissionais','Conheça a equipe')+btn(c.whatsapp,'Fale com a gente','secondary')+'</div></div>')
+  pages['/autismo'][2] = title('CASA DOS AUTISTAS','Nós estamos aqui para acolher','Entenda o autismo, as características do espectro e os níveis de suporte.')+
+    inset('<div class="split autism-intro"><div class="editorial"><h2>O que é autismo?</h2><p>O Transtorno do Espectro Autista (TEA) é uma condição do neurodesenvolvimento que pode influenciar a comunicação, a interação social e a forma de perceber o ambiente. O termo espectro descreve a diversidade de características e de necessidades de apoio.</p><h3>Características que podem aparecer</h3>'+list(traits)+'<p>Respeito, acessibilidade e apoio adequado ajudam cada pessoa a participar da vida em comunidade.</p></div>'+photo(autismArt,'Criança com tinta na mão')+'</div>')+
+    '<section class="section tinted"><div class="wrap"><h2>Níveis de suporte</h2>'+supportCards+'</div></section>'+
+    inset('<div class="editorial narrow"><h2>Inclusão e respeito</h2><p>Cada pessoa no espectro é única. Reconhecer habilidades, respeitar formas de comunicação e oferecer o apoio adequado contribui para a inclusão no dia a dia.</p>'+btn('/como-ser-atendido','Ver o passo a passo')+'</div>')
+  pages['/profissionais'][0] = 'Profissionais'
+  pages['/profissionais'][2] = title('CASA DOS AUTISTAS','Nossa Equipe','Conheça os profissionais e as áreas de atuação da Casa dos Autistas de Betim.')+inset(portraits)
+  pages['/ebooks'][0] = 'E-books'
+  pages['/ebooks'][1] = 'Catálogo de e-books da Casa dos Autistas de Betim.'
+  pages['/ebooks'][2] = title('CASA DOS AUTISTAS','E-books','Explore o catálogo, conheça os autores e acesse os detalhes de cada título.')+inset(library)
+  for (const p of professionals) {
+    pages['/teacher/'+p.slug] = [p.name,p.area+' na Casa dos Autistas de Betim.',
+      title('PROFISSIONAIS',p.name,p.role)+inset('<div class="profile-detail"><div class="portrait standalone">'+photo(p.image,p.name)+'</div><div class="editorial"><h2>'+p.area+'</h2>'+prose(p.bio)+btn('/profissionais','Voltar à equipe','secondary')+'</div></div>')]
+  }
+  for (const book of books) {
+    pages['/classes/'+book.slug] = [book.title,'Detalhes do e-book de '+book.author+'.',
+      title('CATÁLOGO DE E-BOOKS',book.title,book.author+' · E-book Kindle')+
+      inset('<div class="profile-detail"><div class="book-cover standalone">'+photo(book.image,'Capa de '+book.title)+'</div><div class="editorial"><h2>Sobre o livro</h2><p>'+book.summary+'</p><p class="book-meta">'+book.pages+' páginas · Publicação em '+book.date+' · '+book.ages+' anos</p><div class="actions"><strong>R$ '+book.price+'</strong>'+btn(book.buy,'Comprar na Amazon')+'</div><h2>Sobre o autor</h2><h3>Edson Brasil de Castro</h3>'+prose(authorBio)+'<details class="bibliography"><summary>Bibliografia selecionada</summary>'+list(bibliography)+'</details>'+btn('/ebooks','Voltar ao catálogo','secondary')+'</div></div>')+
+      '<section class="section tinted"><div class="wrap"><h2>Mais e-books</h2>'+library+'</div></section>']
+  }
+  pages['/como-ser-atendido'][2] = pages['/como-ser-atendido'][2].replace('Prefere seguir por etapas?','Ainda tem dúvida?').replace('O guia interativo responde às dúvidas mais comuns das famílias.','Converse com o guia. Ele faz perguntas sobre o momento em que você está e ajuda a encontrar a próxima etapa.').replace('Abrir guia interativo','Ainda tenho dúvida')
+  const field = (name,label,type='text',required=false)=>'<div class="field"><label for="contact-'+name+'">'+label+'</label>'+
+    (type==='textarea'?'<textarea id="contact-'+name+'" name="'+name+'" rows="5" maxlength="1500" required></textarea>':'<input id="contact-'+name+'" name="'+name+'" type="'+type+'" maxlength="150"'+(required?' required':'')+'>')+'</div>'
+  pages['/contato'][2] += inset('<div class="split align-start"><div><h2>Fale com a gente</h2><p>Escreva sua mensagem para a equipe. A página prepara o e-mail para você revisar e enviar.</p></div><form id="contact-form" class="card resume" data-recipient="'+c.email+'">'+field('name','Nome','text',true)+field('email','E-mail','email',true)+field('phone','Telefone','tel',true)+field('subject','Assunto','text',true)+field('message','Escreva sua mensagem','textarea',true)+'<label class="consent"><input type="checkbox" required>Confirmo os dados acima.</label><button type="submit" class="button primary">Preparar mensagem '+icon('arrow')+'</button><a id="contact-mail" class="button secondary" hidden>Abrir aplicativo de e-mail</a></form></div>')
+  const resumeFields = '<div class="field-row">'+field('birth','Data de nascimento (opcional)','date')+field('phone','Telefone','tel')+'</div>'+field('address','Endereço (opcional)')+'<fieldset class="social-fields"><legend>Redes sociais</legend><div class="field-row">'+field('instagram','Instagram')+field('facebook','Facebook')+'</div></fieldset>'
+  pages['/trabalhe-conosco'][2] = pages['/trabalhe-conosco'][2].replace('<div class="field"><label for="cv">',resumeFields+'<div class="field"><label for="cv">')
+  pages['/teacher'] = pages['/profissionais']
+  pages['/classes'] = pages['/ebooks']
+}

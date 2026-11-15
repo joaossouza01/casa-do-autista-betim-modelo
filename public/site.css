@@ -133,3 +133,98 @@ dialog::backdrop{background:#24153065}
 @media(max-width:920px){.head-row nav{gap:12px}.head-row nav a{font-size:.84rem}.hero-grid{gap:30px;min-height:480px}.hero-visual{height:340px}}
 @media(max-width:740px){.wrap{width:calc(100% - 36px)}.head-row{min-height:67px;gap:10px}.brand{width:118px}.brand img{height:51px}.menu-toggle{display:inline-flex;margin-left:auto}.head-row nav{display:none;position:absolute;top:100%;left:0;right:0;padding:12px 18px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 6px 9px #0001}.head-row nav.open{display:grid}.head-row nav a{padding:8px}.head-cta{padding:8px 10px;min-height:38px;font-size:.75rem}.head-cta svg{display:none}.hero-grid{grid-template-columns:1fr;padding:31px 0 39px;gap:25px}.hero h1{margin:12px 0}.hero p,.inner-hero p{font-size:1rem}.hero-visual{height:clamp(216px,62vw,340px);width:calc(100% - 20px);justify-self:center}.hero-spark{width:49px;height:49px;right:-12px}.photo-tag{left:-9px;bottom:18px}.hero-dot{right:17px}.cards,.split{grid-template-columns:1fr}.section{padding-block:36px}.section-title{align-items:start;flex-direction:column;gap:8px}.notice{align-items:start;flex-wrap:wrap}.notice>div{flex:1 1 70%}.foot-grid{grid-template-columns:1fr 1fr}.foot-end{padding-right:65px}.float-chat{right:12px;bottom:12px}.float-chat span{display:none}.float-chat{padding:12px}.actions .button{flex-shrink:0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+
+
+/* Institutional pages */
+.head-row{gap:15px}
+.head-row .brand{width:125px}
+.head-row nav{gap:clamp(9px,1.15vw,18px)}
+.head-row nav a{font-size:.84rem}
+.nav-search svg{width:17px;height:17px}
+.classic-hero{position:relative;isolation:isolate;background:#382344}
+.classic-slide{position:relative;isolation:isolate;background:linear-gradient(90deg,#281536b3,#32134048),var(--banner) center 48%/cover}
+.classic-composition{min-height:495px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:22px;padding:48px 0 76px}
+.classic-copy{background:#fffdf5;border-radius:28px;max-width:620px;padding:clamp(25px,4.2vw,53px);box-shadow:0 20px 70px #22142a36;border:1px solid #fff}
+.classic-copy h1,.classic-copy h2{font-size:clamp(2.75rem,5vw,4.7rem);color:#261e3a;margin:12px 0;line-height:1.01}
+.classic-copy p{font-size:clamp(1rem,1.4vw,1.15rem);font-weight:600}
+.classic-art{justify-self:center;width:min(100%,415px);padding:15px 0}
+.classic-art img{width:100%;max-height:355px;object-fit:contain;filter:drop-shadow(0 13px 28px #24103d4f)}
+.slide-controls{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;justify-content:end;gap:9px}
+.slide-controls button{border:1px solid #ffffff86;background:#271539b8;color:white;border-radius:50%;height:40px;width:40px;font-size:.8rem;font-weight:700}
+.slide-controls button[aria-pressed=true]{background:var(--yellow);color:#422645;border-color:var(--yellow)}
+.support-card>img{width:49px;height:49px;object-fit:contain;margin-bottom:16px}
+.support-yellow{background:#fff5d9}.support-purple{background:#f8eefc}.support-green{background:#eaf7ee}
+.founder>img{width:100%;height:clamp(265px,36vw,420px);object-fit:cover;object-position:center;border-radius:25px;border:6px solid #fff}
+.founder blockquote{font-size:clamp(1rem,1.6vw,1.23rem);font-weight:500;color:#4d3c58;line-height:1.6;margin:0 0 17px;border-left:3px solid #a95bc6;padding-left:16px}
+.gallery-footer{display:grid;grid-template-columns:1fr 2fr;gap:18px;align-items:center;margin-top:21px;padding:18px 0 0;border-top:1px solid #decfe6}
+.gallery-footer h2{font-size:1.2rem;margin-bottom:7px}
+.gallery-footer p{font-size:.86rem}
+.mini-gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.mini-gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px}
+.editorial p+p,.editorial p+ul{margin-top:13px}.editorial h3{margin:16px 0 8px}.editorial ul{padding-left:20px;line-height:1.65;color:var(--text)}
+.editorial>.button{margin-top:18px}.editorial .actions+h2{margin-top:27px}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px}
+.mission-grid article{background:white;border:1px solid var(--line);border-radius:20px;padding:20px}
+.mission-grid h2{font-size:1.55rem;margin-top:0}
+.autism-intro>img{max-height:350px;margin:auto}
+.portrait-grid,.book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.book-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.portrait,.book{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 6px 20px #4126520a}
+.portrait a{display:block;text-decoration:none;color:var(--ink)}
+.portrait img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 36%;background:#eee2ef}
+.portrait a>div,.book>div{padding:17px}
+.portrait span{display:inline-flex;align-items:center;gap:7px;margin-top:10px;color:var(--purple);font-size:.88rem;font-weight:700}
+.book{display:flex;flex-direction:column}
+.book-cover{display:grid;place-items:center;background:#f5edf6;padding:16px}
+.book-cover img{width:auto;max-width:100%;height:205px;object-fit:contain;filter:drop-shadow(0 7px 10px #1e0b2924)}
+.book>div{display:flex;flex:1;flex-direction:column;gap:7px}
+.book h3{font-size:1.09rem}.book h3 a{text-decoration:none}.book h3 a:hover{text-decoration:underline}
+.book-meta{font-size:.78rem;color:#655573;font-weight:700}
+.book-end{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:9px}
+.profile-detail{display:grid;grid-template-columns:minmax(210px,310px) minmax(0,1fr);gap:clamp(20px,5vw,58px);align-items:start}
+.standalone{border-radius:20px}
+.standalone img{max-height:390px;aspect-ratio:auto}
+.book-cover.standalone img{height:300px}
+.bibliography{margin-block:18px;color:var(--dark)}.bibliography summary{cursor:pointer;font-weight:700}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.social-fields{margin:0;border:1px solid var(--line);border-radius:13px;padding:12px}
+.social-fields legend{padding-inline:6px;font-weight:700}
+.field textarea,.search-form input{width:100%;font:inherit;border:1px solid #cfc2d9;padding:11px;border-radius:9px}
+.search-form{display:flex;gap:12px;margin-bottom:15px}
+.search-results{list-style:none;padding:0;display:grid;gap:10px}
+.search-results li{background:white;border:1px solid var(--line);border-radius:13px;padding:13px}
+.search-results a{font-weight:700}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+.classic-slide:first-child .classic-art{align-self:end;justify-self:end;width:190px;margin:0 0 20px;padding:12px;background:#fffdf5e8;border-radius:16px;box-shadow:0 8px 22px #2a153e3c}
+.classic-slide:first-child .classic-art img{filter:none}
+.slide-controls button{width:36px;height:36px;display:grid;place-items:center}
+.slide-controls button span{width:7px;height:7px;border-radius:50%;background:currentColor}
+.book-excerpt{font-size:.82rem;line-height:1.5}
+@media(max-width:700px){.classic-slide:first-child .classic-art{width:114px;margin:12px 0 0;padding:7px}}
+
+/* Family guide conversation */
+#family-chat{width:min(740px,calc(100% - 26px));height:min(690px,calc(100dvh - 28px));max-width:none;background:#faf7fb}
+#family-chat::backdrop{background:#22182b91;backdrop-filter:blur(3px)}
+#family-chat .chat-head{padding:19px 23px;background:linear-gradient(112deg,#501c68,#7636a2);flex:none}
+#family-chat .chat-head h2{font-size:clamp(1.28rem,3vw,1.7rem)}
+.chat-stage{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:11px 23px;border-bottom:1px solid #e8ddec;background:white;font-size:.79rem;color:var(--dark);font-weight:700;flex:none}
+.chat-meter{display:flex;align-items:center;gap:5px}
+.chat-meter i{width:24px;height:4px;border-radius:4px;background:#e8dceb}
+.chat-meter .is-active{background:#8f43ad}
+.chat-stream{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:20px 23px;background:radial-gradient(ellipse at 100% 0,#f5e6f7,transparent 55%),#fcf9ff;scrollbar-gutter:stable}
+#chat-history{display:grid;gap:12px}
+#family-chat .chat-message{max-width:85%;margin:0;justify-self:start;background:#f1e5f7;border-radius:3px 17px 17px;padding:12px 15px;font-size:.96rem}
+#family-chat .chat-message.user{justify-self:end;background:#e1f3ea;border-radius:17px 3px 17px 17px}
+.chat-speaker{display:block;font-size:.72rem;font-weight:700;color:#632681;margin-bottom:3px}
+.chat-message.user .chat-speaker{color:#235b46}
+.chat-related{display:inline-flex;margin-top:7px;font-weight:700;font-size:.86rem}
+.chat-typing{font-size:.79rem;color:#63536d;font-style:italic;min-height:20px}
+.chat-compose{padding:14px 23px 12px;background:white;border-top:1px solid var(--line);flex:none}
+#chat-form{display:flex;gap:9px}
+#chat-form input{flex:1;min-width:0;border:1px solid #cfbcd9;border-radius:12px;padding:10px 13px;color:var(--ink);background:#fff}
+#chat-form button:disabled{cursor:wait;opacity:.65}
+.chat-privacy{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;font-size:.72rem;color:#5a4964}
+#restart-chat{background:transparent;border:0;padding:4px 0;text-decoration:underline;white-space:nowrap}
+@media(max-width:1060px){.head-row .menu-toggle{display:inline-flex;margin-left:auto}.head-row nav{display:none;position:absolute;top:100%;left:0;right:0;padding:12px max(18px,calc((100% - 1170px)/2));background:white;border-bottom:1px solid var(--line);box-shadow:0 6px 9px #0001}.head-row nav.open{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.head-row nav a{padding:8px}.book-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.classic-composition{min-height:0;grid-template-columns:1fr;padding:28px 0 63px;gap:0}.classic-art{padding:13px 0 0}.classic-art img{max-height:180px}.classic-copy{padding:22px}.classic-copy h1,.classic-copy h2{font-size:clamp(2.33rem,9vw,3.25rem)}.portrait-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.profile-detail,.gallery-footer,.mission-grid{grid-template-columns:1fr}.profile-detail .standalone{max-width:290px}.field-row{grid-template-columns:1fr}.book-cover img{height:165px}.book-end{flex-wrap:wrap}.book>div,.portrait a>div{padding:11px}.book h3,.portrait h3{font-size:1rem}#family-chat{width:calc(100% - 14px);height:calc(100dvh - 14px);max-height:none;border-radius:18px}#family-chat .chat-head,.chat-compose,.chat-stage,.chat-stream{padding-left:13px;padding-right:13px}#family-chat .chat-message{max-width:93%;font-size:.91rem}}

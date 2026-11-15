@@ -1,5 +1,4 @@
 
-import chat from './guia-chat.js'
 
 const menu = document.querySelector('.menu-toggle')
 menu.addEventListener('click', () => {
@@ -12,63 +11,6 @@ document.addEventListener('keydown', (event) => {
     menu.setAttribute('aria-expanded', 'false')
     menu.focus()
   }
-})
-
-const dialog = document.querySelector('#family-chat')
-const history = document.querySelector('#chat-history')
-const actions = document.querySelector('#chat-actions')
-const close = document.querySelector('#close-chat')
-let launcher
-function element(tag, text, className) {
-  const item = document.createElement(tag)
-  if (text) item.textContent = text
-  if (className) item.className = className
-  return item
-}
-function showTopic(topic, reset = false) {
-  const entry = chat[topic]
-  if (reset || topic === 'inicio') history.replaceChildren()
-  if (entry.label) history.append(element('p', entry.label, 'chat-message user'))
-  const message = element('div', '', 'chat-message')
-  if (entry.step) message.append(element('span', 'Etapa ' + entry.step + ' de 3', 'chat-progress'))
-  message.append(element('p', entry.text))
-  if (entry.list) {
-    const list = element('ul')
-    list.append(...entry.list.map(item => element('li', item)))
-    message.append(list)
-  }
-  if (entry.link) {
-    const [label, href] = entry.link
-    const link = element('a', label)
-    link.href = href
-    if (href.startsWith('/')) link.addEventListener('click', () => dialog.close())
-    message.append(link)
-  }
-  history.append(message)
-  actions.replaceChildren(...entry.options.map(key => {
-    const option = element('button', chat[key].label || 'Voltar ao início')
-    option.type = 'button'
-    option.addEventListener('click', () => {
-      showTopic(key)
-      actions.firstElementChild.focus({ preventScroll: true })
-      history.lastElementChild.scrollIntoView({ block: 'start' })
-    })
-    return option
-  }))
-}
-document.querySelectorAll('[data-chat]').forEach(button => {
-  button.addEventListener('click', () => {
-    launcher = button
-    if (!history.firstChild) showTopic('inicio')
-    dialog.showModal()
-    close.focus()
-  })
-})
-close.addEventListener('click', () => dialog.close())
-dialog.addEventListener('close', () => launcher?.focus())
-document.querySelector('#restart-chat').addEventListener('click', () => {
-  showTopic('inicio', true)
-  actions.firstElementChild.focus()
 })
 
 const resume = document.querySelector('#resume-form')
@@ -150,9 +92,10 @@ if (resume) {
     const file = fileInput.files[0]
     if (!await validPdf(file) || attempt !== revision) return
 
-    const { name, email, area } = Object.fromEntries(new FormData(resume))
+    const { name, email, area, birth, phone, address, instagram, facebook } = Object.fromEntries(new FormData(resume))
     const subject = 'Candidatura — ' + area
-    const text = 'Olá, gostaria de apresentar minha candidatura.\n\nNome: ' + name + '\nE-mail: ' + email + '\nÁrea: ' + area + '\n\nCurrículo em anexo.'
+    const details = [['Nome',name],['E-mail',email],['Área',area],['Data de nascimento',birth],['Telefone',phone],['Endereço',address],['Instagram',instagram],['Facebook',facebook]].filter(([,value])=>value).map(([label,value])=>label+': '+value)
+    const text = ['Olá, gostaria de apresentar minha candidatura.','',...details,'','Currículo em anexo.'].join('\n')
     const mail = document.querySelector('#resume-mail')
     const bytes = await file.arrayBuffer()
     if (attempt !== revision) return
@@ -162,5 +105,73 @@ if (resume) {
     mail.href = 'mailto:' + resume.dataset.recipient + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text)
     confirmation.hidden = false
     draft.focus()
+  })
+}
+
+
+/* Keep the original two home highlights available without auto-rotation. */
+const slideButtons = [...document.querySelectorAll('[data-show-slide]')]
+const slides = [...document.querySelectorAll('[data-slide]')]
+slideButtons.forEach((button,index)=>{
+  button.addEventListener('click',()=>{
+    slides.forEach((slide,position)=>{slide.hidden=position!==index})
+    slideButtons.forEach((item,position)=>item.setAttribute('aria-pressed',String(position===index)))
+  })
+})
+
+const contactForm = document.querySelector('#contact-form')
+if (contactForm) {
+  const link=document.querySelector('#contact-mail')
+  contactForm.addEventListener('input',()=>{link.hidden=true})
+  contactForm.addEventListener('submit',event=>{
+    event.preventDefault()
+    const {name,email,phone,subject,message}=Object.fromEntries(new FormData(contactForm))
+    const body=['Nome: '+name,'E-mail: '+email,'Telefone: '+phone,'',message].join('\n')
+    link.href='mailto:'+contactForm.dataset.recipient+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body)
+    link.hidden=false
+    link.focus()
+  })
+}
+
+const searchForm=document.querySelector('#search-form')
+if (searchForm) {
+  const results=document.querySelector('#search-results')
+  const status=document.querySelector('#search-status')
+  const simplify=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+  let index
+  let searchRequest=0
+  searchForm.addEventListener('submit',async event=>{
+    event.preventDefault()
+    const id=++searchRequest
+    const query=simplify(searchForm.elements.q.value.trim()).split(/\s+/).filter(Boolean)
+    if (!query.length) return
+    results.replaceChildren()
+    status.textContent='Buscando…'
+    try {
+      if (!index) {
+        const response=await fetch('/search-index.json')
+        if (!response.ok) throw new Error('Busca indisponível')
+        index=await response.json()
+      }
+      if (id!==searchRequest) return
+      const matches=index.map(entry=>{
+        const title=simplify(entry.title)
+        const data=simplify(entry.title+' '+entry.desc+' '+entry.text)
+        return {entry,score:query.every(term=>data.includes(term))?query.reduce((score,term)=>score+(title.includes(term)?5:1),0):0}
+      }).filter(item=>item.score).sort((a,b)=>b.score-a.score)
+      status.textContent=matches.length?matches.length+' resultado(s)':'Nenhum resultado. Tente outra palavra.'
+      for (const {entry} of matches) {
+        const li=document.createElement('li')
+        const link=document.createElement('a')
+        link.href=entry.path
+        link.textContent=entry.title
+        const desc=document.createElement('p')
+        desc.textContent=entry.desc
+        li.append(link,desc)
+        results.append(li)
+      }
+    } catch {
+      if (id===searchRequest) status.textContent='Busca indisponível no momento.'
+    }
   })
 }

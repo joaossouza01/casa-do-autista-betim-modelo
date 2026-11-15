@@ -34,15 +34,4 @@ export const faq = [
   ['Já tenho encaminhamento. E agora?', 'Procure a sua UBS para confirmar se a solicitação foi registrada, como acompanhar o encaminhamento e se seus contatos estão atualizados.'],
   ['A vaga na Casa é garantida?','A Regulação agenda conforme o protocolo e as vagas disponíveis nos serviços da rede. A UBS orienta sobre o andamento do pedido.'],
 ]
-export const chat = {
-  inicio: { text:'Olá! Posso explicar como começar o atendimento, o que levar à UBS e como acompanhar um encaminhamento em Betim. Por onde você quer começar?', options:['comecar','documentos','acompanhar','upa','laudo','contato'] },
-  comecar: { label:'Quero iniciar o atendimento', text:steps[0][1], step:1, options:['avaliacao','documentos','upa'] },
-  avaliacao: { label:'O que acontece na UBS?', text:steps[1][1], step:2, options:['acompanhar','laudo','documentos'] },
-  acompanhar: { label:'Já tenho encaminhamento', text:steps[2][1], step:3, options:['vaga','contato','inicio'] },
-  documentos: { label:'Quais documentos devo levar?', text:'Use esta lista para se preparar. Confirme com a UBS quais itens são exigidos no seu caso.', list:documents, link:['Ver checklist','/como-ser-atendido#documentos'], options:['comecar','laudo','acompanhar'] },
-  upa: { label:'UBS ou UPA?', text:faq[1][1], link:['Consultar a Prefeitura',contact.upa], options:['comecar','inicio'] },
-  laudo: { label:'Preciso de laudo?', text:faq[0][1], options:['comecar','documentos','inicio'] },
-  vaga: { label:'A vaga é garantida?', text:faq[4][1], options:['contato','inicio'] },
-  contato: { label:'Falar com a Casa', text:'A equipe da Casa pode esclarecer dúvidas gerais pelo WhatsApp. Para acompanhar o encaminhamento, procure a sua UBS.', link:['Abrir WhatsApp',contact.whatsapp], options:['inicio'] },
-}
 export const balanceFiles = []
