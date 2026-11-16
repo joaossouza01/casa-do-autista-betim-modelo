@@ -24,7 +24,7 @@ export const values = [
 ]
 export const practice = [
   'A Casa dos Autistas conta com uma equipe multiprofissional comprometida com o cuidado integral de cada indivíduo.',
-  'A equipe descreve sua atuação como interdisciplinar, respeitando as potencialidades, as limitações e as necessidades de cada pessoa. O trabalho inclui a Análise do Comportamento Aplicada (ABA), com foco no desenvolvimento de habilidades, na autonomia e na participação social.',
+  'Nossos profissionais realizam abordagem interdisciplinar, respeitando as potencialidades, as limitações e as necessidades de cada pessoa com Transtorno do Espectro Autista. As intervenções desenvolvidas pela Equipe se fundamentam na Ciência da Análise do Comportamento Aplicada (ABA), com práticas baseadas em evidências científicas, foco no desenvolvimento das habilidades, promoção da autonomia e participação social.',
   'A equipe é composta por profissionais da fisioterapia, fonoaudiologia, musicoterapia, psicopedagogia, psicomotricidade, psicologia, terapia ocupacional, serviço social, entre outros.',
   'Todos unidos por um mesmo propósito: tornar a inclusão uma prática real no dia a dia.',
 ]
@@ -104,8 +104,8 @@ export const supportExamples = [
 ]
 export const articleCopy = [
   'O Transtorno do Espectro Autista (TEA) é uma condição do neurodesenvolvimento que pode influenciar como a pessoa se comunica, interage e percebe o mundo. O termo “espectro” descreve como o autismo se manifesta de formas diferentes em cada pessoa, com diferentes necessidades de apoio no dia a dia.',
-  'O autismo faz parte da neurodiversidade. Com apoio adequado, respeito e inclusão, pessoas autistas podem aprender, trabalhar, construir relações e participar da vida em comunidade.',
-  'Cada pessoa no espectro é única. Valorizar habilidades, respeitar formas de comunicação e oferecer o suporte adequado ajuda a construir uma sociedade mais justa e inclusiva.',
+  'É importante lembrar que o autismo não é doença e não tem cura — porque não precisa de cura. Trata-se de uma forma única de funcionamento cerebral. Com apoio adequado, respeito e inclusão, pessoas autistas podem se desenvolver plenamente, aprender, trabalhar, amar e ter uma vida feliz e produtiva.',
+  'Cada pessoa no espectro é única. Ao praticarmos empatia e respeito, ajudamos a construir uma sociedade mais justa e inclusiva. Valorizar as habilidades, estimular com carinho e oferecer suporte adequado faz toda diferença. Autismo não define limitações — define diversidade. Respeite, apoie, inclua.',
 ]
 export const bookDetailCopy = [
   [

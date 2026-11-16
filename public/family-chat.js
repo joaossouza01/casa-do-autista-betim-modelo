@@ -100,6 +100,8 @@ function setStage(value) {
   const data = stages[value]
   status.textContent = data.number ? 'Etapa '+data.number+' de 3 · '+data.label : data.label
   input.placeholder = data.hint
+  dialog.querySelectorAll('.chat-aside li').forEach((item,i)=>item.classList.toggle('is-current',i===Math.max(0,data.number-1)))
+  dialog.querySelector('#chat-greeting').textContent = name ? 'Vamos juntos, '+name+'.' : 'Pode conversar no seu ritmo.'
   for (const [i,bar] of [...meter.children].entries()) bar.classList.toggle('is-active',i<data.number)
 }
 function reset() {

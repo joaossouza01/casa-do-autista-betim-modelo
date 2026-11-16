@@ -165,3 +165,7 @@ if (searchForm) {
     }
   })
 }
+
+const filter=document.querySelector('#team-area')
+filter?.addEventListener('change',()=>{let count=0;document.querySelectorAll('[data-area]').forEach(card=>{card.hidden=!!filter.value&&card.dataset.area!==filter.value;if(!card.hidden)count++});document.querySelector('#team-count').textContent=count+' profissional(is) nesta área.'})
+document.querySelector('[data-print]')?.addEventListener('click',()=>window.print())

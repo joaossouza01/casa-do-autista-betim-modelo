@@ -17,7 +17,7 @@ for (const file of pages) {
   for (const [,url] of body.matchAll(/href="(\/[^"]*)"/g)) {
     const [path,anchor] = url.split('#')
     const target = path==='/'?'index.html':path.slice(1)+(path.includes('.')?'':'.html')
-    const linked = await readFile('dist/'+target)
+    const linked = await readFile('dist/'+decodeURIComponent(target))
     if (anchor) assert.ok(linked.toString().includes('id="'+anchor+'"'),url)
   }
 }
@@ -28,7 +28,7 @@ for (const [file,expected] of [
  ['profissionais.html',professionals.map(item=>item.name)],
  ['ebooks.html',[...books.map(item=>item.title),'Próximos e-books']],
  ['trabalhe-conosco.html',['Data de nascimento','Redes sociais','id="cv"']],
- ['transparencia.html',['Declaração de ausência de faturamento','Consultar declaração no site oficial']],
+ ['transparencia.html',['Declaração de ausência de faturamento','Solicitar documento']],
  ['contato.html',['id="contact-form"','id="contact-subject"']],
  ['como-ser-atendido.html',['Ainda tenho dúvida','O que levar à UBS']],
 ]) {
