@@ -5,7 +5,6 @@ if (hero) {
   const slides = [...hero.querySelectorAll('[data-slide]')]
   const control = hero.querySelector('[data-carousel-toggle]')
   const count = hero.querySelector('#banner-count')
-  const track = hero.querySelector('.hero-track')
   let index = 0
   let paused = reducedMotion.matches
   let pointerInside = false
@@ -13,7 +12,6 @@ if (hero) {
 
   function showSlide(next) {
     index = (next+slides.length)%slides.length
-    track.style.transform = `translateX(-${index*100}%)`
     slides.forEach((slide,i)=>{
       const active = i===index
       slide.classList.toggle('is-active',active)
