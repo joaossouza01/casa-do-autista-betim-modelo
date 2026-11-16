@@ -38,3 +38,24 @@ Modelo: https://casa-do-autista-betim-modelo.vercel.app/
 ## Melhorias seguintes
 
 Entrega direta de currículos e mensagens com confirmação de recebimento; documentos oficiais por exercício; hospedagem dos recursos visuais junto ao site; validação do guia com a equipe e com familiares.
+
+
+## Comparação ponta a ponta e segunda revisão visual
+
+A comparação abriu as oito páginas do menu original (incluindo a home), os seis perfis e os quatro detalhes de e-books. Todas as 18 rotas têm correspondentes na demonstração. O comparativo registra as diferenças de conteúdo, comportamento e infraestrutura encontradas nas páginas públicas, sem presumir acesso ao painel do WordPress.
+
+| Área | Diferença constatada | Resultado da revisão |
+| --- | --- | --- |
+| Home | A primeira arte do carrossel e o ícone da chamada estavam ausentes; o texto cobria parte da foto | Restauradas as artes dos dois slides e o ícone. Fotos e texto ganharam áreas próprias. Transição, pausa e botões foram preservados |
+| Sobre nós e Autismo | O conteúdo principal estava presente, mas as capas com sobreposição lavada davam o mesmo aspecto às páginas. A classificação antiga usava “leve”, “moderado” e “severo” | Capas com composição e paletas próprias. Mantidos os níveis de suporte com linguagem centrada nas necessidades de apoio |
+| Profissionais | Os seis perfis estavam presentes; duas rotas históricas têm nomes que não coincidem com os perfis exibidos | Nomes e cargos visíveis preservados e URLs antigas mantidas. Diretório com filtro e fotos sem sobreposição de texto |
+| E-books | Os quatro ASINs da Amazon coincidem com os do original. Há um título residual “SASASASAS” no original | Capas, detalhes, biografia, bibliografia e compra preservados. Texto residual descartado |
+| Busca | O formato antigo do WordPress usa `/?s=`; o modelo anterior não interpretava esse endereço | Busca antiga redireciona para `/buscar?q=`. A busca nova aceita links compartilháveis e a navegação do histórico |
+| Contato | O WordPress aponta para um formulário próprio. O modelo anterior preparava somente e-mail | Telefone opcional, escolha de e-mail ou WhatsApp na preparação da mensagem e link para o formulário original. A pessoa revisa e envia no canal escolhido |
+| Currículos | O original tem formulário do WordPress, sem campo de arquivo. A demonstração possui anexo PDF e gera rascunho local | Campos preservados. O rascunho com anexo permanece disponível e há um caminho para usar o formulário original sem PDF |
+| Transparência | Três botões iguais do balanço de 2024 apontavam para `#`. A declaração de 2025 não estava disponível na rota original consultada | Um registro por documento, com solicitação por e-mail. Os arquivos oficiais ainda precisam ser fornecidos |
+| Rodapé e galeria | O telefone original tinha discagem incompleta. Havia seis fotos e links sociais | Telefone corrigido, seis fotos preservadas com ampliação e links sociais mantidos. Rodapé reorganizado com contraste e navegação por tarefa |
+
+A tipografia Baloo 2 e Roboto, as fotos e a marca permanecem. O fundo, o enquadramento, a escala de títulos e a densidade de elementos foram revistos no site inteiro. As páginas de equipe, catálogo, transparência, atendimento e contato têm layouts próprios.
+
+O build conferiu 24 páginas, incluindo páginas adicionais do modelo. No navegador, foram verificadas 24 rotas em seis larguras, de 320 a 1440 px, sem rolagem horizontal. Foram exercitados a busca nos dois formatos, a preparação do contato, a troca de banner, a aba Visão, a galeria, o carrossel de livros e a abertura do chat com uma resposta digitada. Nenhuma mensagem real foi enviada. A entrega automática de currículos e mensagens na demonstração depende de uma integração de envio configurada.

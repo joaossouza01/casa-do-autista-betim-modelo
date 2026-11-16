@@ -112,13 +112,16 @@ if (resume) {
 const contactForm = document.querySelector('#contact-form')
 if (contactForm) {
   const link=document.querySelector('#contact-mail')
-  contactForm.addEventListener('input',()=>{link.hidden=true})
+  const delivery=document.querySelector('#contact-delivery')
+  const whatsapp=document.querySelector('#contact-whatsapp')
+  contactForm.addEventListener('input',()=>{delivery.hidden=true})
   contactForm.addEventListener('submit',event=>{
     event.preventDefault()
     const {name,email,phone,subject,message}=Object.fromEntries(new FormData(contactForm))
-    const body=['Nome: '+name,'E-mail: '+email,'Telefone: '+phone,'',message].join('\n')
+    const body=['Nome: '+name,'E-mail: '+email,...(phone?['Telefone: '+phone]:[]),'',message].join('\n')
     link.href='mailto:'+contactForm.dataset.recipient+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body)
-    link.hidden=false
+    whatsapp.href=contactForm.dataset.whatsapp+'?text='+encodeURIComponent(subject+'\n\n'+body)
+    delivery.hidden=false
     link.focus()
   })
 }
@@ -130,10 +133,9 @@ if (searchForm) {
   const simplify=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
   let index
   let searchRequest=0
-  searchForm.addEventListener('submit',async event=>{
-    event.preventDefault()
+  async function runSearch(term) {
     const id=++searchRequest
-    const query=simplify(searchForm.elements.q.value.trim()).split(/\s+/).filter(Boolean)
+    const query=simplify(term.trim()).split(/\s+/).filter(Boolean)
     if (!query.length) return
     results.replaceChildren()
     status.textContent='Buscando…'
@@ -163,7 +165,31 @@ if (searchForm) {
     } catch {
       if (id===searchRequest) status.textContent='Busca indisponível no momento.'
     }
+  }
+  function loadSearch() {
+    const term=new URL(location.href).searchParams.get('q')||''
+    searchForm.elements.q.value=term.slice(0,100)
+    if (term.trim()) runSearch(searchForm.elements.q.value)
+    else {
+      searchRequest++
+      status.textContent=''
+      results.replaceChildren()
+    }
+  }
+  searchForm.addEventListener('submit',event=>{
+    event.preventDefault()
+    const term=searchForm.elements.q.value.trim()
+    if(!term) return
+    const url=new URL(location.href)
+    url.searchParams.set('q',term)
+    if(url.href!==location.href) history.pushState(null,'',url)
+    runSearch(term)
   })
+  addEventListener('popstate',loadSearch)
+  loadSearch()
+} else if (location.pathname==='/') {
+  const term=new URL(location.href).searchParams.get('s')?.trim()
+  if(term) location.replace('/buscar?q='+encodeURIComponent(term.slice(0,100)))
 }
 
 const filter=document.querySelector('#team-area')
