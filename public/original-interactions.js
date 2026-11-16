@@ -160,3 +160,15 @@ topButton.addEventListener('click',()=>{
   window.scrollTo({top:0,behavior:reducedMotion.matches?'instant':'smooth'})
 })
 updateTopButton()
+
+const playfulArtwork = document.querySelectorAll('[data-play]')
+if (playfulArtwork.length && !reducedMotion.matches && 'IntersectionObserver' in window) {
+  const artworkObserver = new IntersectionObserver((entries, observer) => {
+    for (const { isIntersecting, target } of entries) {
+      if (!isIntersecting) continue
+      if (!reducedMotion.matches) target.classList.add('play-enter')
+      observer.unobserve(target)
+    }
+  }, { threshold: .25 })
+  playfulArtwork.forEach(artwork => artworkObserver.observe(artwork))
+}
