@@ -7,11 +7,11 @@ export function refine(pages, { c, media, btn, a, icon, title, chip, chatBtn, st
   const prose = items => items.map(text=>`<p>${text}</p>`).join('')
   const aside = `<aside class="contact-aside"><span class="eyebrow">PODE CONTAR COM A CASA</span><h2>Vamos conversar?</h2><p>A equipe pode esclarecer dúvidas sobre a instituição e suas atividades.</p>${btn(c.whatsapp,'Falar com a equipe')}${a(c.telephone,c.phone,'contact-phone')}</aside>`
   const shortcuts = [
-    ['/como-ser-atendido','home','Como ser atendido','Encaminhamento pela UBS'],
-    ['/profissionais','people','Quem atende','Conheça a equipe da Casa'],
-    ['/contato','chat','Fale com a Casa','Telefone, WhatsApp e e-mail'],
+    ['/como-ser-atendido','Como ser atendido','Encaminhamento pela UBS'],
+    ['/profissionais','Quem atende','Conheça a equipe da Casa'],
+    ['/contato','Fale com a Casa','Telefone, WhatsApp e e-mail'],
   ]
-  const routeMenu = `<nav class="family-shortcuts wrap" aria-label="Atalhos para famílias">${shortcuts.map(([href, symbol, name, description])=>a(href,`<span class="shortcut-icon">${icon(symbol)}</span><span class="shortcut-label"><strong>${name}</strong><small>${description}</small></span>${icon('arrow')}`)).join('')}</nav>`
+  const routeMenu = `<nav class="family-shortcuts wrap" aria-label="Atalhos para famílias">${shortcuts.map(([href, name, description])=>a(href,`<span class="shortcut-label"><strong>${name}</strong><small>${description}</small></span>${icon('arrow')}`)).join('')}</nav>`
   pages['/'][2] = pages['/'][2].replace('</section>', '</section>'+routeMenu)
     .replace('<section class="section tinted"><div class="wrap split founder">','<section class="section founder-section"><div class="wrap split founder">')
     .replace('<section class="section tinted"><div class="wrap split"><div class="feature-image">','<section class="section everyday-section"><div class="wrap split"><div class="feature-image">')
@@ -21,7 +21,7 @@ export function refine(pages, { c, media, btn, a, icon, title, chip, chatBtn, st
     const end=pages['/'][2].indexOf('</section>',homeGuideStart)+10
     pages['/'][2]=pages['/'][2].slice(0,homeGuideStart)+`<section class="section family-section"><div class="wrap family-layout"><div>${chip('PARA FAMÍLIAS')}<h2>O primeiro passo começa com orientação.</h2><p>Entenda como procurar atendimento em Betim e organize o que levar à UBS.</p><div class="actions">${btn('/como-ser-atendido','Ver passo a passo')}${chatBtn('Ainda tenho dúvida')}</div></div>${stepCards()}</div></section>`+pages['/'][2].slice(end)
   }
-  pages['/quem-somos'][2]=title('NOSSA HISTÓRIA','Quem Somos','Acolhimento, aprendizado e inclusão para pessoas autistas e suas famílias.')+`<section class="section wrap about-story"><div class="editorial"><h2>Uma Casa feita de pessoas.</h2>${prose(story)}</div><figure>${photo(media.activity,'Atividade na Casa dos Autistas')}<figcaption>Encontros, aprendizado e convivência na Casa.</figcaption></figure></section><section class="section purpose-section"><div class="wrap"><div class="mission-grid"><article><span class="section-index">01 / Nosso propósito</span><h2>Missão</h2><p>${mission}</p></article><article><span class="section-index">02 / Nosso horizonte</span><h2>Visão</h2><p>${vision}</p></article></div><div class="values-layout"><h2>Nossos valores</h2><dl class="values-list">${values.map(([label,desc])=>`<div><dt>${label}</dt><dd>${desc}</dd></div>`).join('')}</dl></div></div></section><section class="section wrap editorial-with-aside"><div class="editorial"><span class="eyebrow">CUIDADO INTEGRADO</span><h2>Profissionais</h2>${prose(practice)}<div class="actions">${btn('/profissionais','Conheça a equipe','secondary')}</div></div>${aside}</section>`
+  pages['/quem-somos'][2]=title('NOSSA HISTÓRIA','Quem Somos','Acolhimento, aprendizado e inclusão para pessoas autistas e suas famílias.')+`<section class="section wrap about-story"><div class="editorial"><h2>Uma Casa feita de pessoas.</h2>${prose(story)}</div><figure>${photo(media.activity,'Atividade na Casa dos Autistas')}<figcaption>Encontros, aprendizado e convivência na Casa.</figcaption></figure></section><section class="section purpose-section"><div class="wrap"><div class="mission-grid"><article><h2>Missão</h2><p>${mission}</p></article><article><h2>Visão</h2><p>${vision}</p></article></div><div class="values-layout"><h2>Nossos valores</h2><dl class="values-list">${values.map(([label,desc])=>`<div><dt>${label}</dt><dd>${desc}</dd></div>`).join('')}</dl></div></div></section><section class="section wrap editorial-with-aside"><div class="editorial"><span class="eyebrow">CUIDADO INTEGRADO</span><h2>Profissionais</h2>${prose(practice)}<div class="actions">${btn('/profissionais','Conheça a equipe','secondary')}</div></div>${aside}</section>`
 
   // Preserve all six profiles while making the directory useful to scan.
   const specialties=[...new Set(professionals.map(p=>p.area))]
