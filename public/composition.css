@@ -1,0 +1,207 @@
+/* Composição das páginas e caminhos de navegação da Casa. */
+:root {
+  --plum: #41214b;
+  --plum-deep: #2f1837;
+  --orchid-paper: #f1e7f3;
+  --butter-paper: #fbefd7;
+  --leaf-paper: #e8f1e7;
+  --thread: linear-gradient(90deg, #bc3c47 0 25%, #ecae30 25% 50%, #3f7896 50% 75%, #5b8853 75%);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  background: var(--thread);
+  opacity: .76;
+  pointer-events: none;
+}
+.header .head-cta, .float-chat { border-radius: 24px 24px 24px 8px; }
+.inner-hero .wrap::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 3px;
+  width: 57px;
+  border-radius: 2px;
+  background: var(--thread);
+}
+.family-shortcuts {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-block: 24px 0;
+  padding-block: 0;
+  border: 0;
+  background: var(--butter-paper);
+  border-radius: 10px 35px 10px 35px;
+}
+.family-shortcuts > a, .family-shortcuts > a:nth-child(3) {
+  display: grid;
+  grid-template-columns: 41px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 15px;
+  padding: 21px clamp(14px, 2.3vw, 28px);
+  border: 0;
+}
+.family-shortcuts > a + a:nth-child(n) { border-left: 1px solid #d5baa483; }
+.family-shortcuts > a:hover .shortcut-icon { background: var(--plum); color: white; }
+.shortcut-icon {
+  display: grid; place-items: center; width: 41px; height: 41px;
+  border-radius: 40% 55% 42% 55%; background: #fffaf0; color: var(--plum);
+  transition: background .16s, color .16s;
+}
+.family-shortcuts .shortcut-icon svg { color: inherit; }
+.shortcut-label strong { display: block; font: 700 1.18rem/1.08 'Baloo 2', sans-serif; }
+.shortcut-label small { display: block; margin-top: 4px; color: var(--text); font-size: .77rem; line-height: 1.4; }
+.home-about { background: none; }
+.home-about .split { gap: clamp(38px, 7vw, 108px); }
+.home-about h2 { max-width: 15ch; margin-top: 8px; }
+.home-about .editorial > .eyebrow { color: #684472; }
+.about-collage {
+  grid-template-columns: 1fr .46fr;
+  gap: 0;
+  align-items: end;
+  padding: 12px 0 32px;
+  isolation: isolate;
+}
+.about-collage::before {
+  content: '';
+  position: absolute;
+  inset: 0 20% 13% -4%;
+  background: var(--butter-paper);
+  border-radius: 48% 48% 10% 10% / 32% 32% 8% 8%;
+  z-index: -1;
+}
+.about-collage img:first-child {
+  height: auto;
+  aspect-ratio: .86;
+  border-radius: 45% 45% 12px 12px / 29% 29% 12px 12px;
+  object-position: center 46%;
+}
+.about-collage img:nth-child(2) {
+  width: calc(100% + 24px);
+  max-width: none;
+  height: auto;
+  aspect-ratio: .78;
+  margin: 0 0 -30px -24px;
+  border: 6px solid var(--paper);
+  border-radius: 16px 16px 46px 16px;
+  object-position: center;
+}
+.about-tabs { gap: 6px; border-bottom: 0; padding-bottom: 8px; flex-wrap: wrap; }
+.about-tabs button {
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  font-size: .93rem;
+}
+.about-tabs button[aria-selected=true] { background: var(--orchid-paper); border-color: #c5a5ca; color: var(--plum); }
+.about-tabs button::after { display: none; }
+.founder-section { background: var(--paper); }
+.founder {
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 6vw, 70px);
+  align-items: center;
+  background: var(--plum-deep);
+  border-radius: 24px 70px 24px 24px;
+  padding: clamp(25px, 4vw, 56px);
+}
+.founder > img { height: auto; aspect-ratio: 4 / 4.8; border-radius: 46% 46% 12px 12px / 32% 32% 12px 12px; }
+.founder h2, .founder blockquote, .founder strong { color: #fff9fd; }
+.founder .eyebrow { color: #f7cd86; }
+.founder blockquote { font-size: clamp(1.05rem, 1.6vw, 1.3rem); margin-block: 18px; line-height: 1.55; }
+.founder strong { color: #f8d796; }
+.founder .founder-role { color: #f1dff2; font-size: .88rem; }
+.family-section { background: transparent; }
+.family-layout {
+  background: var(--leaf-paper);
+  border-radius: 70px 14px 70px 14px;
+  padding: clamp(28px, 5vw, 66px);
+  gap: clamp(32px, 5vw, 70px);
+}
+.family-layout h2 { max-width: 18ch; }
+.family-layout .step-number { border-radius: 37% 51% 43% 51%; }
+.everyday-section { background: var(--butter-paper); }
+.everyday-section .split { grid-template-columns: 1.16fr .84fr; gap: clamp(32px, 7vw, 90px); }
+.everyday-section .feature-image { border-radius: 10px 90px 10px 36px; }
+.support-section .cards, body[data-page=autismo] .tinted .cards {
+  gap: clamp(16px, 3vw, 42px);
+}
+.support-section .card.support-card, body[data-page=autismo] .tinted .card.support-card {
+  border: 0;
+  border-top: 1px solid #cbb7cb;
+  border-radius: 0;
+  background: transparent;
+  padding: 20px 0 8px;
+}
+.support-section .support-card > img, body[data-page=autismo] .support-card > img { width: 48px; height: 48px; margin: 0 0 13px; }
+.support-section .support-card h3 { max-width: 23ch; }
+.purpose-section .values-list { gap: 13px 28px; }
+.values-list > div { border-color: #d6bd9b; }
+.directory-intro { padding-bottom: 16px; }
+.team-filter select { border-radius: 8px; }
+.portrait-grid { column-gap: clamp(16px, 4vw, 48px); }
+.portrait-photo { border-radius: 47% 47% 13px 13px / 26% 26% 13px 13px; }
+.portrait img { aspect-ratio: 4 / 4.25; }
+.portrait a > div:last-child { padding-inline: 4px; }
+.portrait a:hover h2 { color: var(--purple); }
+.profile-detail > img, .profile-detail img.standalone { border-radius: 48% 48% 14px 14px / 28% 28% 14px 14px; }
+.book-cover, .book-cover.standalone {
+  border-radius: 50% 50% 14px 14px / 25% 25% 14px 14px;
+  border-bottom: 3px solid #c49e785e;
+  background: #f2e6d5;
+}
+.book:nth-child(2n) .book-cover { background: #eee5f2; }
+.book:nth-child(3n) .book-cover { background: #e9f0e4; }
+.book-cover img { transition: transform .2s ease, filter .2s ease; }
+.book-cover:hover img { transform: translateY(-3px); }
+.book-carousel-controls button, .gallery-controls button { background: transparent; border-radius: 50%; }
+.document-row { column-gap: 20px; row-gap: 12px; }
+.document-year { font-variant-numeric: tabular-nums; }
+.contact-aside {
+  background: var(--leaf-paper);
+  border: 0;
+  border-radius: 32px 9px 32px 9px;
+}
+.contact-writing, .application-form { border-radius: 24px 44px 24px 24px; box-shadow: 0 0 0 1px var(--line), 0 14px 34px #291b2909; }
+.contact-writing input, .contact-writing textarea, .application-form input:not([type=checkbox]) { border-radius: 8px; }
+.activity-record img { border-radius: 10px 62px 10px 10px; }
+.footer { position: relative; background: var(--plum-deep); }
+.footer::before { content: ''; position: absolute; inset: 0 0 auto; height: 4px; background: var(--thread); }
+.footer .brand { border-radius: 8px 23px 8px 8px; }
+.gallery-footer .mini-gallery a { overflow: hidden; border-radius: 8px 18px 8px 8px; }
+.gallery-footer .mini-gallery img { transition: transform .2s ease; }
+.gallery-footer .mini-gallery a:hover img { transform: scale(1.035); }
+@media (min-width: 980px) {
+  .document-row { grid-template-columns: 65px minmax(0, 1fr) auto; }
+  .document-row > .button { grid-column: auto; align-self: center; white-space: nowrap; }
+}
+@media (max-width: 850px) {
+  .family-shortcuts > a, .family-shortcuts > a:nth-child(3) { gap: 9px; padding-inline: 14px; }
+  .family-shortcuts .shortcut-label strong { font-size: 1.05rem; }
+}
+@media (max-width: 700px) {
+  .family-shortcuts { grid-template-columns: minmax(0, 1fr); margin-top: 16px; border-radius: 12px 28px 12px 28px; padding: 6px 16px; }
+  .family-shortcuts > a, .family-shortcuts > a:nth-child(3), .family-shortcuts > a:last-child {
+    grid-template-columns: 37px minmax(0, 1fr) 18px;
+    padding: 12px 0 !important;
+    border: 0 !important;
+  }
+  .family-shortcuts > a + a:nth-child(n) { border-top: 1px solid #d5baa483 !important; }
+  .shortcut-icon { width: 37px; height: 37px; }
+  .home-about .split, .everyday-section .split { grid-template-columns: minmax(0, 1fr); gap: 31px; }
+  .about-collage { max-width: 430px; }
+  .about-collage::before { inset-inline-start: 0; }
+  .founder { grid-template-columns: minmax(0,1fr); border-radius: 19px 45px 19px 19px; gap: 25px; }
+  .founder > img { width: min(100%, 255px); }
+  .family-layout { border-radius: 40px 12px 40px 12px; }
+  .everyday-section .feature-image { border-top-right-radius: 58px; }
+  .support-section .support-card > img, body[data-page=autismo] .support-card > img { width: 39px; height: 39px; margin: 0 12px 8px 0; }
+  .support-section .support-card h3, body[data-page=autismo] .support-card h3 { min-height: 0; }
+}
+@media print {
+  .family-layout { background: white; padding: 0; }
+  .inner-hero .wrap::after { display: none; }
+}

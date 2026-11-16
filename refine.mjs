@@ -6,7 +6,12 @@ export function refine(pages, { c, media, btn, a, icon, title, chip, chatBtn, st
   const photo = (src, alt, cls='') => `<img class="${cls}" src="${src}" alt="${alt}" loading="lazy" decoding="async">`
   const prose = items => items.map(text=>`<p>${text}</p>`).join('')
   const aside = `<aside class="contact-aside"><span class="eyebrow">PODE CONTAR COM A CASA</span><h2>Vamos conversar?</h2><p>A equipe pode esclarecer dúvidas sobre a instituição e suas atividades.</p>${btn(c.whatsapp,'Falar com a equipe')}${a(c.telephone,c.phone,'contact-phone')}</aside>`
-  const routeMenu = `<nav class="family-shortcuts wrap" aria-label="Atalhos para famílias"><div><span class="eyebrow">ESTAMOS AQUI PARA ACOLHER</span><p>Encontre o que você precisa.</p></div>${a('/como-ser-atendido','<span>Quero orientação sobre atendimento</span>'+icon('arrow'))}${a('/profissionais','<span>Quero conhecer a equipe</span>'+icon('arrow'))}${a('/contato','<span>Quero falar com a Casa</span>'+icon('arrow'))}</nav>`
+  const shortcuts = [
+    ['/como-ser-atendido','home','Como ser atendido','Encaminhamento pela UBS'],
+    ['/profissionais','people','Quem atende','Conheça a equipe da Casa'],
+    ['/contato','chat','Fale com a Casa','Telefone, WhatsApp e e-mail'],
+  ]
+  const routeMenu = `<nav class="family-shortcuts wrap" aria-label="Atalhos para famílias">${shortcuts.map(([href, symbol, name, description])=>a(href,`<span class="shortcut-icon">${icon(symbol)}</span><span class="shortcut-label"><strong>${name}</strong><small>${description}</small></span>${icon('arrow')}`)).join('')}</nav>`
   pages['/'][2] = pages['/'][2].replace('</section>', '</section>'+routeMenu)
     .replace('<section class="section tinted"><div class="wrap split founder">','<section class="section founder-section"><div class="wrap split founder">')
     .replace('<section class="section tinted"><div class="wrap split"><div class="feature-image">','<section class="section everyday-section"><div class="wrap split"><div class="feature-image">')
@@ -46,5 +51,5 @@ export function refine(pages, { c, media, btn, a, icon, title, chip, chatBtn, st
     ['Oficina gastronômica','Preparar receitas em grupo abre espaço para experimentar texturas, seguir etapas e participar com autonomia.','https://www.instagram.com/casadoautistabetim/reel/DfAlMgmOCMr/','Ver uma oficina'],
     ['Teatro e expressão','Apresentações e atividades culturais convidam à imaginação, à comunicação e à convivência.','https://www.instagram.com/casadoautistabetim/reel/DfR2iB0RiV4/','Ver atividade'],
     ['Convivência e parcerias','Encontros e ações com parceiros aproximam as famílias e ampliam as experiências das crianças.',c.instagram,'Acompanhar no Instagram'],
-  ].map(([heading,text,url,label],i)=>`<article><span class="activity-number">0${i+1}</span><div><h2>${heading}</h2><p>${text}</p>${a(url,label+' '+icon('arrow'),'text-link')}</div></article>`).join('')}<figure class="activity-record">${photo(gallery[2],'Registro da Casa dos Autistas publicado no site original')}<figcaption>Um registro da Casa. Mais atividades no Instagram da instituição.</figcaption></figure></section>`
+  ].map(([heading,text,url,label],i)=>`<article><span class="activity-number" aria-hidden="true">${icon(['heart','spark','people'][i])}</span><div><h2>${heading}</h2><p>${text}</p>${a(url,label+' '+icon('arrow'),'text-link')}</div></article>`).join('')}<figure class="activity-record">${photo(gallery[2],'Registro da Casa dos Autistas publicado no site original')}<figcaption>Um registro da Casa. Mais atividades no Instagram da instituição.</figcaption></figure></section>`
 }
