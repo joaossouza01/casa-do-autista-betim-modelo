@@ -1,10 +1,11 @@
 
-import { facts, documents, resources } from './guia-chat.js'
+import { facts, documents, resources, visit } from './guia-chat.js'
 
 const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
 const no = /^(nao|ainda nao|nunca|negativo)\b/
 const yes = /^(sim|ja|tenho|pode|claro|quero)\b/
 const uncertain = /\b(nao sei|nao lembro|nao tenho certeza|talvez|acho que|em duvida)\b/
+const wantsVisit = value => /\b(visita(?:s|r)?|conhecer (?:a|o) (?:casa|espaco|local)|ir pessoalmente)\b/.test(value)
 const stages = {
   name: { label:'Apresentação', number:0, hint:'Digite seu primeiro nome' },
   start: { label:'Entender sua situação', number:1, hint:'Conte em que ponto você está…', question:'Você já procurou a UBS por causa do desenvolvimento da criança ou ainda vai começar?' },
@@ -64,6 +65,11 @@ const submit = form.querySelector('button')
 const status = document.querySelector('#chat-stage')
 const meter = document.querySelector('.chat-meter')
 const restart = document.querySelector('#restart-chat')
+const visitButton = document.querySelector('#chat-visit')
+const typing = document.querySelector('#chat-typing')
+const typingStatus = document.querySelector('#chat-typing-status')
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+const greeting = 'Oi! Eu sou o guia virtual da Casa. Posso orientar sobre atendimento pelo SUS ou sobre como conhecer o espaço. Como posso te chamar?'
 let stage = 'name'
 let name = ''
 let launcher
@@ -101,7 +107,6 @@ function setStage(value) {
   status.textContent = data.number ? 'Etapa '+data.number+' de 3 · '+data.label : data.label
   input.placeholder = data.hint
   dialog.querySelectorAll('.chat-aside li').forEach((item,i)=>item.classList.toggle('is-current',i===Math.max(0,data.number-1)))
-  dialog.querySelector('#chat-greeting').textContent = name ? 'Vamos juntos, '+name+'.' : 'Pode conversar no seu ritmo.'
   for (const [i,bar] of [...meter.children].entries()) bar.classList.toggle('is-active',i<data.number)
 }
 function reset() {
@@ -110,28 +115,30 @@ function reset() {
   history.replaceChildren()
   name = ''
   input.value = ''
-  submit.disabled = false
   setStage('name')
-  append({text:'Oi! Eu sou o guia da Casa dos Autistas. Vamos descobrir juntos por onde começar em Betim. Como posso te chamar?'})
+  reply({stage:'name',text:greeting})
 }
 function reply(entry) {
   submit.disabled = true
-  const typing = el('div','Guia da Casa está respondendo…','chat-typing')
-  history.append(typing)
+  visitButton.disabled = true
+  typing.hidden = false
+  typingStatus.textContent = 'Guia da Casa está digitando.'
   stream.scrollTop = stream.scrollHeight
   timer = setTimeout(()=>{
-    typing.remove()
+    typing.hidden = true
+    typingStatus.textContent = ''
     const changed = stage!==entry.stage
-    setStage(entry.stage)
+    if (changed) setStage(entry.stage)
     append(entry)
-    if (changed || entry.resume) append({text:stages[stage].question})
+    if ((changed || entry.resume) && stages[stage].question) append({text:stages[stage].question})
     submit.disabled = false
-  },320)
+    visitButton.disabled = false
+  },reducedMotion.matches ? 120 : Math.min(1250, 560 + entry.text.length * 3))
 }
 function readName(value) {
   const candidate = value.replace(/^(?:oi[,.! ]+)?(?:meu nome (?:é|e)|me chamo|pode me chamar de|sou|eu sou)\s+/i,'').trim()
   if (!/^[\p{L}][\p{L}\p{M}'’ -]{0,44}$/u.test(candidate) || candidate.split(/\s+/).length>5 || /\b(ajuda|documentos|atendimento|ubs|upa|whatsapp|laudo|vaga|ola|oi)\b/.test(normalize(candidate))) return ''
-  return candidate
+  return candidate.split(/\s+/)[0]
 }
 form.addEventListener('submit',event=>{
   event.preventDefault()
@@ -140,6 +147,10 @@ form.addEventListener('submit',event=>{
   input.value = ''
   input.focus()
   append({text:value},'user')
+  if (wantsVisit(normalize(value))) {
+    reply({stage,...visit})
+    return
+  }
   if (stage==='name') {
     if (normalize(value)==='pular') {
       name = 'família'
@@ -153,11 +164,16 @@ form.addEventListener('submit',event=>{
   }
   reply(next(stage,value,name))
 })
+visitButton.addEventListener('click',()=>{
+  if (submit.disabled) return
+  append({text:'Quero conhecer a Casa.'},'user')
+  reply({stage,...visit})
+})
 document.querySelectorAll('[data-chat]').forEach(button=>{
   button.addEventListener('click',()=>{
     launcher = button
-    if (!history.firstChild) reset()
     dialog.showModal()
+    if (!history.firstChild && typing.hidden) reset()
     input.focus()
     stream.scrollTop = stream.scrollHeight
   })

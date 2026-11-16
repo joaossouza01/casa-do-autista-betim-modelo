@@ -30,7 +30,36 @@ const stepCards = () => '<ol class="care-steps">'+steps.map(([heading,body],inde
 const questionList = (items=faq) => '<div class="questions">'+items.map(([q,r])=>'<details><summary>'+q+icon('plus')+'</summary><p>'+r+'</p></details>').join('')+'</div>'
 const links = (path) => '<header class="header"><div class="wrap head-row"><a class="brand" href="/" aria-label="Casa dos Autistas de Betim, início"><img src="'+media.logo+'" alt="Casa dos Autistas"></a><button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" type="button">Menu</button><nav id="site-nav" aria-label="Menu principal">'+ navLinks(nav,path) + '<a href="/buscar" class="nav-search" aria-label="Buscar no site">'+icon('search')+'</a></nav>'+btn('/como-ser-atendido','Como ser atendido','primary head-cta')+'</div></header>'
 const footer = (path) => '<footer class="footer"><div class="wrap foot-grid"><div><a href="/" class="brand"><img loading="lazy" src="'+media.logo+'" alt="Casa dos Autistas"></a><p>Acolhimento, desenvolvimento e inclusão em Betim, Minas Gerais.</p></div><div><h2>Conheça a Casa</h2>'+navLinks(nav,path)+'</div><div><h2>Informações</h2>'+navLinks(more,path)+'</div><div><h2>Fale com a Casa</h2>'+a(c.telephone,c.phone)+a('mailto:'+c.email,'Enviar e-mail')+a(c.whatsapp,'WhatsApp')+a(c.instagram,'Instagram')+'</div></div>'+galleryFooter(c.instagram)+'<div class="wrap foot-end"><span>Casa dos Autistas de Betim</span><span>CNPJ 05.161.667/0001-90</span><span>Modelo para revisão</span></div></footer>'
-const dialog = '<button type="button" data-chat class="float-chat" aria-label="Preciso de ajuda" aria-haspopup="dialog">'+icon('chat')+'<span>Preciso de ajuda</span></button><dialog id="family-chat" aria-labelledby="chat-heading"><aside class="chat-aside"><img src="'+media.logo+'" alt="Casa dos Autistas"><span class="eyebrow">ORIENTAÇÃO PARA FAMÍLIAS</span><h2>Um passo de cada vez.</h2><p>Conte em que momento você está. Vamos organizar o próximo passo juntos.</p><ol><li>Entender sua situação</li><li>Preparar o próximo passo</li><li>Organizar suas dúvidas</li></ol><p class="chat-aside-note">Guia automático com respostas predefinidas. Não realiza agendamento.</p></aside><div class="chat-main"><div class="chat-head"><div><h2 id="chat-heading">Guia da Casa</h2><p id="chat-greeting">Pode conversar no seu ritmo.</p></div><button type="button" id="close-chat" aria-label="Fechar chat">&times;</button></div><div class="chat-stage"><span id="chat-stage"></span><span class="chat-meter" aria-hidden="true"><i></i><i></i><i></i></span></div><div class="chat-stream"><div id="chat-history" role="log" aria-live="polite" aria-relevant="additions"></div></div><div class="chat-compose"><form id="chat-form"><label for="chat-input" class="visually-hidden">Sua resposta</label><input id="chat-input" placeholder="Digite seu primeiro nome" autocomplete="off" maxlength="300" required><button type="submit" class="button primary">Enviar '+icon('arrow')+'</button></form><div class="chat-privacy"><span>Use só o primeiro nome. A conversa fica nesta janela.</span><button type="button" id="restart-chat">Recomeçar</button></div></div></div></dialog>'
+const chatAvatar = '<span class="chat-avatar" aria-hidden="true">'+icon('home')+'</span>'
+const dialog =
+  '<button type="button" data-chat class="float-chat" aria-label="Preciso de ajuda" aria-haspopup="dialog">'+icon('chat')+'<span>Preciso de ajuda</span></button>'+
+  '<dialog id="family-chat" aria-labelledby="chat-heading">'+
+    '<aside class="chat-aside"><img src="'+media.logo+'" alt="Casa dos Autistas">'+
+      '<span class="eyebrow">ORIENTAÇÃO PARA FAMÍLIAS</span><h2>Um passo de cada vez.</h2>'+
+      '<p>Conte em que momento você está. Vamos organizar o próximo passo juntos.</p>'+
+      '<ol><li>Entender sua situação</li><li>Preparar o próximo passo</li><li>Organizar suas dúvidas</li></ol>'+
+      '<p class="chat-aside-note">O guia é automático. O atendimento pelo SUS é encaminhado pela UBS.</p>'+
+    '</aside>'+
+    '<div class="chat-main">'+
+      '<div class="chat-head"><div class="chat-identity">'+chatAvatar+
+        '<div><h2 id="chat-heading">Guia da Casa</h2><p id="chat-greeting">Guia virtual da Casa dos Autistas</p></div>'+
+      '</div><button type="button" id="close-chat" aria-label="Fechar chat">&times;</button></div>'+
+      '<div class="chat-stage"><span id="chat-stage"></span><span class="chat-meter" aria-hidden="true"><i></i><i></i><i></i></span></div>'+
+      '<div class="chat-stream"><div id="chat-history" role="log" aria-live="polite" aria-relevant="additions"></div>'+
+        '<div id="chat-typing" class="chat-typing" hidden aria-hidden="true">'+chatAvatar+
+          '<span class="chat-dots"><i></i><i></i><i></i></span>'+
+        '</div>'+
+      '</div><span id="chat-typing-status" class="visually-hidden" role="status"></span>'+
+      '<div class="chat-compose">'+
+        '<form id="chat-form"><label for="chat-input" class="visually-hidden">Sua resposta</label>'+
+          '<input id="chat-input" placeholder="Digite seu primeiro nome" autocomplete="off" maxlength="300" required>'+
+          '<button type="submit" class="button primary">Enviar '+icon('arrow')+'</button>'+
+        '</form>'+
+        '<div class="chat-actions"><button type="button" id="chat-visit">'+icon('home')+'Conhecer a Casa</button><button type="button" id="restart-chat">Recomeçar</button></div>'+
+        '<p class="chat-privacy">Use só o primeiro nome e evite compartilhar documentos ou dados de saúde.</p>'+
+      '</div>'+
+    '</div>'+
+  '</dialog>'
 const pages = {
   '/': ['Início','Terapias, oficinas e orientação às famílias na Casa dos Autistas de Betim.',''],
   '/como-ser-atendido': ['Como ser atendido','Veja como iniciar o encaminhamento pela UBS e acompanhar a solicitação.',
@@ -68,7 +97,7 @@ function layout(path,[name,description,body]) {
     const breadcrumb = '<nav class="breadcrumbs" aria-label="Você está aqui">'+a('/','Início')+(parent?' <span aria-hidden="true">›</span> '+a(...parent):'')+' <span aria-hidden="true">›</span> <span aria-current="page">'+name+'</span></nav>'
     body = body.replace('<section class="inner-hero"><div class="wrap">','<section class="inner-hero"><div class="wrap">'+breadcrumb)
   }
-  return '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="'+description+'"><meta name="robots" content="noindex"><meta name="theme-color" content="#fcf9f2"><title>'+name+' | Casa dos Autistas de Betim</title><link rel="icon" href="'+media.logo+'"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/site.css"><link rel="stylesheet" href="/editorial.css"><link rel="stylesheet" href="/composition.css"><script type="module" src="/site.js"></script><script type="module" src="/family-chat.js"></script><script type="module" src="/original-interactions.js"></script></head><body data-page="'+(path.startsWith('/teacher/')?'perfil':path.startsWith('/classes/')?'livro':path==='/'?'inicio':path.slice(1))+'"><a href="#main" class="skip">Pular para o conteúdo</a><div class="utility-bar"><div class="wrap"><span>Casa dos Autistas · Betim, MG</span><div>'+a(c.telephone,c.phone)+a(c.instagram,'Instagram')+'<span class="demo-label">Modelo para revisão</span></div></div></div>'+links(path)+'<main id="main">'+body+'</main>'+footer(path)+dialog+'<button type="button" class="back-top" aria-label="Voltar ao topo" hidden>↑</button></body></html>'
+  return '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="'+description+'"><meta name="robots" content="noindex"><meta name="theme-color" content="#fcf9f2"><title>'+name+' | Casa dos Autistas de Betim</title><link rel="icon" href="'+media.logo+'"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/site.css"><link rel="stylesheet" href="/editorial.css"><link rel="stylesheet" href="/composition.css"><link rel="stylesheet" href="/chat.css"><script type="module" src="/site.js"></script><script type="module" src="/family-chat.js"></script><script type="module" src="/original-interactions.js"></script></head><body data-page="'+(path.startsWith('/teacher/')?'perfil':path.startsWith('/classes/')?'livro':path==='/'?'inicio':path.slice(1))+'"><a href="#main" class="skip">Pular para o conteúdo</a><div class="utility-bar"><div class="wrap"><span>Casa dos Autistas · Betim, MG</span><div>'+a(c.telephone,c.phone)+a(c.instagram,'Instagram')+'<span class="demo-label">Modelo para revisão</span></div></div></div>'+links(path)+'<main id="main">'+body+'</main>'+footer(path)+dialog+'<button type="button" class="back-top" aria-label="Voltar ao topo" hidden>↑</button></body></html>'
 }
 await mkdir('dist',{recursive:true})
 await cp('public','dist',{recursive:true})
@@ -86,8 +115,28 @@ for (const {file} of balanceFiles) {
   }
 }
 const facts = {upa:faq[1][1],laudo:faq[0][1],wait:'Confirme na sua UBS se o encaminhamento está registrado e mantenha seu telefone atualizado. A Regulação organiza os agendamentos conforme o protocolo e as vagas da rede.',vaga:faq[4][1],contato:'A equipe da Casa esclarece dúvidas sobre atendimento pelo WhatsApp. O acompanhamento de um encaminhamento é feito pela UBS de referência.',ubs:steps[0][1]}
+function googleBookingUrl(value) {
+  if (!value) return null
+  const url = new URL(value)
+  const shortLink = url.hostname === 'calendar.app.google' && url.pathname.split('/').filter(Boolean).length === 1
+  const bookingPage = url.hostname === 'calendar.google.com' && url.pathname.startsWith('/calendar/appointments/') && url.pathname.split('/').filter(Boolean).length > 2
+  if (url.protocol !== 'https:' || url.username || url.password || url.port || (!shortLink && !bookingPage)) {
+    throw new Error('GOOGLE_VISIT_BOOKING_URL deve apontar para uma página de agendamento do Google Agenda.')
+  }
+  return url.href
+}
+const bookingUrl = googleBookingUrl(process.env.GOOGLE_VISIT_BOOKING_URL?.trim())
+const visitWhatsApp = c.whatsapp + '?text=' + encodeURIComponent('Olá! Gostaria de saber se é possível agendar uma visita para conhecer a Casa dos Autistas de Betim.')
+const visit = {
+  text: bookingUrl
+    ? 'Para conhecer a Casa, escolha um horário disponível na página de agendamento. A visita é institucional; para iniciar o atendimento pelo SUS, procure a UBS de referência.'
+    : 'Para conhecer a Casa, pergunte à equipe pelo WhatsApp sobre disponibilidade de visita. A equipe combina o horário com você. Para iniciar o atendimento pelo SUS, procure a UBS de referência.',
+  link: bookingUrl
+    ? ['Ver horários no Google Agenda', bookingUrl]
+    : ['Pedir uma visita pelo WhatsApp', visitWhatsApp],
+}
 const resources = {guide:['Ver guia de atendimento','/como-ser-atendido'],checklist:['Abrir checklist','/como-ser-atendido#documentos'],upa:['Consultar a Prefeitura',c.upa],whatsapp:['Falar com a Casa no WhatsApp',c.whatsapp]}
-await writeFile('dist/guia-chat.js','export const facts = '+JSON.stringify(facts)+'; export const documents = '+JSON.stringify(documents)+'; export const resources = '+JSON.stringify(resources))
+await writeFile('dist/guia-chat.js','export const facts = '+JSON.stringify(facts)+'; export const documents = '+JSON.stringify(documents)+'; export const resources = '+JSON.stringify(resources)+'; export const visit = '+JSON.stringify(visit))
 const searchIndex = Object.entries(pages).filter(([path])=>!['/buscar','/404','/teacher','/classes'].includes(path)).map(([path,[title,desc,body]])=>({path,title,desc,text:body.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ')}))
 await writeFile('dist/search-index.json',JSON.stringify(searchIndex))
 for (const [path,page] of Object.entries(pages)) {
