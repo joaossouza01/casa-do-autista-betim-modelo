@@ -69,12 +69,32 @@ const visitButton = document.querySelector('#chat-visit')
 const typing = document.querySelector('#chat-typing')
 const typingStatus = document.querySelector('#chat-typing-status')
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+const visualViewport = window.visualViewport
 const greeting = 'Oi! Eu sou o guia virtual da Casa. Posso orientar sobre atendimento pelo SUS ou sobre como conhecer o espaço. Como posso te chamar?'
 let stage = 'name'
 let name = ''
 let launcher
 let timer
 let messages = 0
+
+function fitChatToViewport() {
+  if (!dialog.open) return
+  const keyboardVisible = visualViewport && Math.abs(visualViewport.scale - 1) < .01 &&
+    window.innerHeight - visualViewport.height > 80
+  const height = keyboardVisible ? visualViewport.height : window.innerHeight
+  const showLatest = stream.scrollHeight - stream.scrollTop - stream.clientHeight < 32
+  dialog.toggleAttribute('data-chat-compact', height <= 520)
+  dialog.toggleAttribute('data-chat-inset', Boolean(keyboardVisible))
+  if (keyboardVisible) {
+    dialog.style.setProperty('--chat-visible-height', height + 'px')
+    dialog.style.setProperty('--chat-visible-top', visualViewport.offsetTop + 'px')
+  }
+  if (showLatest) stream.scrollTop = stream.scrollHeight
+}
+
+window.addEventListener('resize', fitChatToViewport)
+visualViewport?.addEventListener('resize', fitChatToViewport)
+visualViewport?.addEventListener('scroll', fitChatToViewport)
 
 function el(tag, text='', className='') {
   const node = document.createElement(tag)
@@ -173,6 +193,7 @@ document.querySelectorAll('[data-chat]').forEach(button=>{
   button.addEventListener('click',()=>{
     launcher = button
     dialog.showModal()
+    fitChatToViewport()
     if (!history.firstChild && typing.hidden) reset()
     input.focus()
     stream.scrollTop = stream.scrollHeight
