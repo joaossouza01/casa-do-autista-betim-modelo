@@ -146,7 +146,7 @@ body[data-page=autismo] .inner-hero .wrap > :not(.breadcrumbs) { max-width: min(
 }
 .form-alternate { margin-top: 20px; font-size: .88rem; }
 .footer { background: #292039; border: 0; color: #fff9f6; }
-.footer p, .footer a, .footer .foot-end { color: #f1e7ef; }
+.footer p, .footer a, .footer .foot-end, .footer .foot-grid a:not(.brand) { color: #f1e7ef; }
 .footer .brand { background: #fff; border-radius: 8px; padding: 4px 7px; }
 .gallery-footer, .foot-end { border-color: #ffffff36; }
 .footer :focus-visible { outline-color: var(--yellow); }
